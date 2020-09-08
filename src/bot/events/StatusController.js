@@ -1,12 +1,20 @@
+const db = require('quick.db');
+
 class StatusController {
 	constructor(bot) {
 		bot.on('presenceUpdate', async (oldPresence, newPresence) => {
-			const { guild, user, member, status } = newPresence;
-			if (user.id !== '360247173356584960') return;
-			if ((!oldPresence || oldPresence.status === 'offline') && status !== 'offline') {
-				const channel = guild.channels.cache.get('622951594547347469')
+			const { guild, user, status } = newPresence;
 
-				channel.send(`<@360247173356584960>, o usuário ${user.tag} mudou o status de offline para ${newPresence.status}`)
+			if ((!oldPresence || oldPresence.status === 'offline') && status !== 'offline') {
+				const listViewers = db.get(`user_viewed.${user.id}.users`)
+
+				if (listViewers) {
+					Object.entries(listViewers).forEach((viewer) => {
+						const channel = guild.channels.cache.get(viewer[1])
+
+						channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de offline para ${newPresence.status}`)
+					})
+				}
 			}
 		});
 	}

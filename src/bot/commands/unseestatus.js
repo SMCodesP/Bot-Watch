@@ -1,12 +1,12 @@
 const db = require('quick.db');
 
-class ViewStatus {
+class UnseeStatus {
 	constructor() {
 		this.config = {
-			name: 'viewstatus',
+			name: 'unseestatus',
 			aliases: [],
 			help:
-				'Com esse comando você pode adicionar um usuário na sua visualização de status, ou seja sempre que um usuário passar do status offline para online/idle/dnd você será avisado.',
+				'Com esse comando você pode remover um usuário de alerta da sua lista de alert status, com isso você não receberá mais avisos quando usuário ficar online',
 			requiredPermissions: ['MANAGE_MESSAGES'],
 		};
 		this.run = async ({ msg, args, prefix }) => {
@@ -25,15 +25,15 @@ class ViewStatus {
 			const listViewers = db.get(`user_viewed.${mentionMember.user.id}.users.${msg.author.id}`)
 
 			if (!listViewers) {
-				db.set(`user_viewed.${mentionMember.user.id}.users.${msg.author.id}`, msg.channel.id)
-			} else {
-				msg.reply('você já está observando esse usuário, por favor digite um usuário novo ou excluia esse usuário.')
+				msg.reply('você não está observando esse usuário, por favor digite um usuário que você está observando no momento.')
 				return;
+			} else {
+				db.delete(`user_viewed.${mentionMember.user.id}.users.${msg.author.id}`)
 			}
 
-			msg.reply(`agora você está observando o status do usuário ${mentionMember} com sucesso!`)
+			msg.reply(`você removeu o viewer status do usuário ${mentionMember} com sucesso!`)
 		};
 	}
 }
 
-module.exports = new ViewStatus();
+module.exports = new UnseeStatus();
