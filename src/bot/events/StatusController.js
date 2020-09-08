@@ -6,7 +6,7 @@ class StatusController {
 			const { guild, user, status } = newPresence;
 			const oldStatus = (!oldPresence) ? 'offline' : oldPresence.status
 
-			if (status !== 'offline') {
+			if (status !== 'offline' && status !== oldStatus) {
 				const listViewers = db.get(`user_viewed.${user.id}.users`)
 
 				if (listViewers) {
@@ -16,6 +16,7 @@ class StatusController {
 
 						if (channel) {
 							channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de ${oldStatus} para ${newPresence.status}`)
+								.then(messageAlert => messageAlert.delete({ timeout: 25000 }))
 						}
 					})
 				}
