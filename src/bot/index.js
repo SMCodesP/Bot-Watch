@@ -3,6 +3,7 @@ const path = require('path')
 const { registerCmds } = require('register-cmd-discord')
 
 const MessageController = require('./events/MessageController')
+const StatusController = require('./events/StatusController')
 
 class Bot {
 	constructor() {
@@ -31,10 +32,16 @@ class Bot {
 
 	registerEvents()  {
 		new MessageController(this.bot)
+		new StatusController(this.bot)
 	}
 
 	async login() {
-		await this.bot.login(process.env.TOKEN)
+		try {
+			await this.bot.login(process.env.TOKEN)
+			console.log('O bot foi ligado com sucesso!')
+		} catch (error) {
+			console.log(error)
+		}
 	}
 }
 
