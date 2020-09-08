@@ -4,7 +4,7 @@ class StatusController {
 	constructor(bot) {
 		bot.on('presenceUpdate', async (oldPresence, newPresence) => {
 			const { guild, user, status } = newPresence;
-			const oldPresence = (!oldPresence) ? 'offline' : oldPresence.status
+			const oldStatus = (!oldPresence) ? 'offline' : oldPresence.status
 
 			if (status !== 'offline') {
 				const listViewers = db.get(`user_viewed.${user.id}.users`)
