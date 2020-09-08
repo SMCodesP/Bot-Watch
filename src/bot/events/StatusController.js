@@ -15,7 +15,7 @@ class StatusController {
 						const channel = guild.channels.cache.get(viewer[1])
 
 						if (channel) {
-							channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de ${} para ${newPresence.status}`)
+							channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de ${oldStatus} para ${newPresence.status}`)
 						}
 					})
 				}
