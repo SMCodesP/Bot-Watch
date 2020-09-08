@@ -11,8 +11,8 @@ class Web {
 
 	routes() {
 		this.app.get('/', (req, res) => {
-			return res.send('Oi')
-		});
+			res.send('Hello World!')
+		})
 	}
 
 	open(port) {
