@@ -10,9 +10,12 @@ class StatusController {
 
 				if (listViewers) {
 					Object.entries(listViewers).forEach((viewer) => {
+						console.log(viewer[1])
 						const channel = guild.channels.cache.get(viewer[1])
 
-						channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de offline para ${newPresence.status}`)
+						if (channel) {
+							channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de offline para ${newPresence.status}`)
+						}
 					})
 				}
 			}

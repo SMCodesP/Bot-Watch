@@ -7,7 +7,7 @@ class ViewStatus {
 			aliases: [],
 			help:
 				'Com esse comando você pode adicionar um usuário na sua visualização de status, ou seja sempre que um usuário passar do status offline para online/idle/dnd você será avisado.',
-			requiredPermissions: ['MANAGE_MESSAGES'],
+			requiredPermissions: [],
 		};
 		this.run = async ({ msg, args, prefix }) => {
 

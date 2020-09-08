@@ -7,7 +7,7 @@ class UnseeStatus {
 			aliases: [],
 			help:
 				'Com esse comando você pode remover um usuário de alerta da sua lista de alert status, com isso você não receberá mais avisos quando usuário ficar online',
-			requiredPermissions: ['MANAGE_MESSAGES'],
+			requiredPermissions: [],
 		};
 		this.run = async ({ msg, args, prefix }) => {
 
