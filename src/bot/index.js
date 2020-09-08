@@ -39,6 +39,9 @@ class Bot {
 		try {
 			await this.bot.login(process.env.TOKEN)
 			console.log('O bot foi ligado com sucesso!')
+
+			const teste = await this.bot.users.fetch('690271757223067690')
+			console.log(teste)
 		} catch (error) {
 			console.log(error)
 		}

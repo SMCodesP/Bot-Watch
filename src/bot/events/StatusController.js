@@ -4,8 +4,9 @@ class StatusController {
 	constructor(bot) {
 		bot.on('presenceUpdate', async (oldPresence, newPresence) => {
 			const { guild, user, status } = newPresence;
+			const oldPresence = (!oldPresence) ? 'offline' : oldPresence.status
 
-			if ((!oldPresence || oldPresence.status === 'offline') && status !== 'offline') {
+			if (status !== 'offline') {
 				const listViewers = db.get(`user_viewed.${user.id}.users`)
 
 				if (listViewers) {
@@ -14,7 +15,7 @@ class StatusController {
 						const channel = guild.channels.cache.get(viewer[1])
 
 						if (channel) {
-							channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de offline para ${newPresence.status}`)
+							channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de ${} para ${newPresence.status}`)
 						}
 					})
 				}
