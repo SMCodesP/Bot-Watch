@@ -17,7 +17,6 @@ class MessageController {
 						if (!checkUserHasPermission(perm, msg.member)) state = false;
 					});
 				}
-				await msg.delete();
 				if (!state && msg.member.id !== process.env.OWNER) {
 					msg.reply('Você não tem permissão para executar esse comando.');
 				} else {

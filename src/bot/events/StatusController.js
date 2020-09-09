@@ -16,7 +16,6 @@ class StatusController {
 
 						if (channel) {
 							channel.send(`<@${viewer[0]}>, o usuário ${user.tag} mudou o status de ${oldStatus} para ${newPresence.status}`)
-								.then(messageAlert => messageAlert.delete({ timeout: 25000 }))
 						}
 					})
 				}
